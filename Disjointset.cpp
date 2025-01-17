@@ -14,19 +14,6 @@ public:
                 if(node == Parent[node]) return node;
                 return Parent[node]= findUParent(Parent[node]);
         }
-        void unionByRank(int u,int v)
-        {
-                int ulp_u=findUParent(u);
-                int ulp_v=findUParent(v);
-                if(ulp_u == ulp_v) return;
-                if(Rank[ulp_u] > Rank[ulp_v])   Parent[ulp_v]=ulp_u;
-                else if(Rank[ulp_u] < Rank[ulp_v]) Parent[ulp_u]=ulp_v;
-                else{
-                        Parent[ulp_u]=ulp_v;
-                        Rank[ulp_v]++;
-                }
-
-        }
         void unionBySize(int u,int v)
         {
                 int ulp_u=findUParent(u);
@@ -39,6 +26,20 @@ public:
                 else{
                         Parent[ulp_u]=ulp_v;
                         Size[ulp_v] += Size[ulp_u];
+                }
+
+        }
+
+        void unionByRank(int u,int v)
+        {
+                int ulp_u=findUParent(u);
+                int ulp_v=findUParent(v);
+                if(ulp_u == ulp_v) return;
+                if(Rank[ulp_u] > Rank[ulp_v])   Parent[ulp_v]=ulp_u;
+                else if(Rank[ulp_u] < Rank[ulp_v]) Parent[ulp_u]=ulp_v;
+                else{
+                        Parent[ulp_u]=ulp_v;
+                        Rank[ulp_v]++;
                 }
 
         }
